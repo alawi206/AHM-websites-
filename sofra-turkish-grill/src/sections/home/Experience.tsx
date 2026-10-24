@@ -83,7 +83,7 @@ export function Experience() {
             aria-label={chapter.kicker}
           >
             <div className="story-media absolute inset-0">
-              <Photo slot={chapter.slot} sizes="100vw" labelPosition="center" />
+              <Photo slot={chapter.slot} sizes="100vw" artLayout="stage" />
               <div
                 aria-hidden="true"
                 className="absolute inset-0 bg-[linear-gradient(to_top,rgb(25_18_14/0.92)_0%,rgb(25_18_14/0.5)_40%,rgb(25_18_14/0.12)_68%,rgb(25_18_14/0.6)_100%)]"

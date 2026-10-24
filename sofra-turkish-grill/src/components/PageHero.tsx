@@ -18,7 +18,7 @@ export function PageHero({ slot, eyebrow, title, titleAccent, intro, actions }: 
   return (
     <section className="relative isolate flex min-h-[68svh] items-end overflow-hidden bg-espresso text-ivory lg:min-h-[74svh]">
       <div className="hero-media absolute inset-0 -z-10">
-        <Photo slot={slot} priority sizes="100vw" labelPosition="top-right" />
+        <Photo slot={slot} priority sizes="100vw" />
       </div>
       <div
         aria-hidden="true"

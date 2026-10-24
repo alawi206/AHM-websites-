@@ -19,7 +19,7 @@ export function Hero() {
     >
       <div ref={mediaRef} className="absolute inset-0 -z-10 will-change-transform">
         <div className="hero-media absolute inset-0">
-          <Photo slot="hero" priority sizes="100vw" labelPosition="top-right" />
+          <Photo slot="hero" priority sizes="100vw" artMotif />
         </div>
       </div>
 

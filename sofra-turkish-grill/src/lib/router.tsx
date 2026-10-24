@@ -50,7 +50,13 @@ export function BrowserRouter({ children }: { children: ReactNode }) {
     const url = new URL(to, window.location.href)
     const samePage = normalizePath(url.pathname) === normalizePath(window.location.pathname)
     if (url.href !== window.location.href) window.history.pushState(null, '', url)
-    if (samePage && !url.hash) window.scrollTo({ top: 0, behavior: 'smooth' })
+    // Same-page links: jump to the anchor, or back to the top. Smoothness
+    // follows the CSS `scroll-behavior`, which respects reduced motion.
+    if (samePage) {
+      const target = url.hash && document.getElementById(decodeURIComponent(url.hash.slice(1)))
+      if (target) target.scrollIntoView()
+      else if (!url.hash) window.scrollTo({ top: 0 })
+    }
     setLocation(readLocation())
   }, [])
 

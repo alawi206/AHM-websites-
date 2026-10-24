@@ -2,9 +2,11 @@ import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react'
 import { ButtonLink } from '../components/Button'
 import { Close, Search, StarMotif } from '../components/icons'
 import { PageHero } from '../components/PageHero'
+import { SignatureDishes } from '../components/SignatureDishes'
 import { Eyebrow } from '../components/ui'
 import { business } from '../data/business'
 import { formatPrice, menu, type MenuCategory, type MenuItem } from '../data/menu'
+import { isSignature } from '../data/signatures'
 
 const normalize = (value: string) =>
   value
@@ -156,6 +158,26 @@ export function MenuPage() {
             : ''}
         </p>
 
+        {!normalizedQuery && (
+          <section aria-labelledby="menu-signatures-title" className="container-luxe pt-12 lg:pt-16">
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <Eyebrow>House Signatures</Eyebrow>
+                <h2 id="menu-signatures-title" className="mt-4 font-display text-display-md">
+                  Where to <span className="italic">begin.</span>
+                </h2>
+              </div>
+              <p className="flex items-center gap-2 text-sm text-ink-soft">
+                <StarMotif size={13} strokeWidth={2.2} className="text-gold-deep" />
+                Marks a signature dish throughout the menu.
+              </p>
+            </div>
+            <div className="mt-8">
+              <SignatureDishes variant="compact" />
+            </div>
+          </section>
+        )}
+
         <div className="container-luxe pb-[clamp(4rem,9vw,7rem)] pt-6">
           {categories.length === 0 ? (
             <EmptyState query={deferredQuery.trim()} onClear={() => setQuery('')} />
@@ -201,7 +223,7 @@ function CategorySection({ category, number }: { category: MenuCategory; number:
             {group.title && <h3 className="eyebrow mb-2 text-[0.65rem] text-ink-soft">{group.title}</h3>}
             <ul className="grid gap-x-12 md:grid-cols-2">
               {group.items.map((item) => (
-                <Item key={item.name} item={item} />
+                <Item key={item.name} item={item} signature={isSignature(category.id, item.name)} />
               ))}
             </ul>
           </div>
@@ -211,11 +233,17 @@ function CategorySection({ category, number }: { category: MenuCategory; number:
   )
 }
 
-function Item({ item }: { item: MenuItem }) {
+function Item({ item, signature }: { item: MenuItem; signature: boolean }) {
   return (
     <li className="border-b border-sand/70 py-4">
       <div className="flex items-baseline">
         <span className="font-display text-[1.4rem] leading-tight text-ink sm:text-[1.5rem]">{item.name}</span>
+        {signature && (
+          <>
+            <StarMotif size={13} strokeWidth={2.2} className="ml-2.5 shrink-0 self-center text-gold-deep" />
+            <span className="sr-only"> (signature dish)</span>
+          </>
+        )}
         {item.price !== undefined && (
           <>
             <span className="leader" aria-hidden="true" />

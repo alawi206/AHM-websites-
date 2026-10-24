@@ -2,6 +2,7 @@ import { TextLink } from '../../components/Button'
 import { Photo } from '../../components/Photo'
 import { StarMotif } from '../../components/icons'
 import { Eyebrow, RevealWords, revealDelay } from '../../components/ui'
+import { hasPhoto } from '../../lib/photos'
 
 export function Welcome() {
   return (
@@ -66,15 +67,17 @@ export function Welcome() {
               />
             </svg>
             <div className="mask-arch relative aspect-[4/5]">
-              <Photo slot="welcome-main" reveal labelPosition="bottom-right" sizes="(min-width: 1024px) 44vw, (min-width: 640px) 70vw, 84vw" />
+              <Photo slot="welcome-main" reveal sizes="(min-width: 1024px) 44vw, (min-width: 640px) 70vw, 84vw" />
             </div>
           </div>
 
-          <div className="absolute -bottom-10 left-0 w-[46%] border-[8px] border-ivory shadow-[0_30px_60px_-30px_rgb(36_27_22/0.45)] sm:w-[38%] sm:border-[10px] lg:-bottom-12 lg:w-[40%]">
-            <div className="relative aspect-square">
-              <Photo slot="welcome-detail" reveal revealDelay={250} sizes="(min-width: 1024px) 22vw, 42vw" />
+          {hasPhoto('welcome-detail') && (
+            <div className="absolute -bottom-10 left-0 w-[46%] border-[8px] border-ivory shadow-[0_30px_60px_-30px_rgb(36_27_22/0.45)] sm:w-[38%] sm:border-[10px] lg:-bottom-12 lg:w-[40%]">
+              <div className="relative aspect-square">
+                <Photo slot="welcome-detail" reveal revealDelay={250} sizes="(min-width: 1024px) 22vw, 42vw" />
+              </div>
             </div>
-          </div>
+          )}
 
           <StarMotif
             size={64}

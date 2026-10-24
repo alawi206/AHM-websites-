@@ -3,10 +3,12 @@ import { Photo } from '../../components/Photo'
 import { StarMotif } from '../../components/icons'
 import { Eyebrow, RevealWords, revealDelay } from '../../components/ui'
 import { business } from '../../data/business'
+import { hasPhoto } from '../../lib/photos'
 
 export const occasions = ['Corporate events', 'Family celebrations', 'Birthdays', 'Private gatherings']
 
 export function CateringFeature() {
+  const withPhoto = hasPhoto('catering-main')
   return (
     <section
       aria-labelledby="catering-title"
@@ -14,15 +16,34 @@ export function CateringFeature() {
     >
       <div className="pattern-girih [--pattern-opacity:0.06]" />
       <div className="container-luxe relative grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
-        <div className="relative order-2 lg:order-1 lg:col-span-6">
-          <div className="relative aspect-[4/5] w-[86%] sm:w-[72%] lg:w-[82%]">
-            <Photo slot="catering-main" reveal labelPosition="center" sizes="(min-width: 1024px) 40vw, 80vw" />
+        <div className={`relative order-2 lg:order-1 lg:col-span-6 ${withPhoto ? '' : 'hidden lg:block'}`}>
+          {!withPhoto && (
+            // Gold arch outline framing the art panel when there is no photo.
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 400 500"
+              preserveAspectRatio="none"
+              className="absolute left-6 top-6 aspect-[4/5] w-[82%] text-gold/60"
+            >
+              <path
+                d="M0 500V196C0 98 86 40 200 0c114 40 200 98 200 196v304Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+          )}
+          <div className={`relative aspect-[4/5] w-[86%] sm:w-[72%] lg:w-[82%] ${withPhoto ? '' : 'mask-arch'}`}>
+            <Photo slot="catering-main" reveal sizes="(min-width: 1024px) 40vw, 80vw" />
           </div>
-          <div className="absolute -bottom-8 right-0 w-[48%] border-[8px] border-olive sm:w-[40%] sm:border-[10px] lg:right-2">
-            <div className="relative aspect-[4/5]">
-              <Photo slot="catering-detail" reveal revealDelay={250} sizes="(min-width: 1024px) 20vw, 44vw" />
+          {hasPhoto('catering-detail') && (
+            <div className="absolute -bottom-8 right-0 w-[48%] border-[8px] border-olive sm:w-[40%] sm:border-[10px] lg:right-2">
+              <div className="relative aspect-[4/5]">
+                <Photo slot="catering-detail" reveal revealDelay={250} sizes="(min-width: 1024px) 20vw, 44vw" />
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="order-1 lg:order-2 lg:col-span-5 lg:col-start-8">

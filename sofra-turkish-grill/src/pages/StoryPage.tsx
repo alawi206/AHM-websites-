@@ -4,6 +4,7 @@ import { PageHero } from '../components/PageHero'
 import { StarMotif } from '../components/icons'
 import { Eyebrow, Ornament, RevealWords, revealDelay } from '../components/ui'
 import { business } from '../data/business'
+import { hasPhoto } from '../lib/photos'
 
 /** The restaurant's own stated values, as published on sofratg.com. */
 const values = [
@@ -23,6 +24,38 @@ const values = [
     text: 'We foster a sense of belonging and togetherness.',
   },
 ]
+
+/** Photo pair shown only once authorized photos exist (one photo goes wide). */
+function StoryPhotos() {
+  const kitchen = hasPhoto('story-kitchen')
+  const table = hasPhoto('story-table')
+  if (!kitchen && !table) return null
+  if (kitchen !== table) {
+    return (
+      <section aria-label="Inside Sofra" className="bg-ivory pb-[clamp(5rem,11vw,10rem)]">
+        <div className="container-luxe">
+          <div className="relative aspect-[4/5] sm:aspect-[16/9]">
+            <Photo slot={kitchen ? 'story-kitchen' : 'story-table'} reveal sizes="(min-width: 1440px) 1376px, 100vw" />
+          </div>
+        </div>
+      </section>
+    )
+  }
+  return (
+    <section aria-label="Inside Sofra" className="bg-ivory pb-[clamp(5rem,11vw,10rem)]">
+      <div className="container-luxe grid gap-6 md:grid-cols-12 md:gap-8">
+        <div className="relative aspect-[4/5] md:col-span-5 md:mt-24">
+          <Photo slot="story-kitchen" reveal sizes="(min-width: 768px) 40vw, 100vw" />
+        </div>
+        <div className="relative md:col-span-7">
+          <div className="mask-arch relative aspect-[4/5]">
+            <Photo slot="story-table" reveal revealDelay={200} sizes="(min-width: 768px) 55vw, 100vw" />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export function StoryPage() {
   return (
@@ -67,18 +100,7 @@ export function StoryPage() {
         </div>
       </section>
 
-      <section aria-label="Inside Sofra" className="bg-ivory pb-[clamp(5rem,11vw,10rem)]">
-        <div className="container-luxe grid gap-6 md:grid-cols-12 md:gap-8">
-          <div className="relative aspect-[4/5] md:col-span-5 md:mt-24">
-            <Photo slot="story-kitchen" reveal sizes="(min-width: 768px) 40vw, 100vw" />
-          </div>
-          <div className="relative md:col-span-7">
-            <div className="mask-arch relative aspect-[4/5]">
-              <Photo slot="story-table" reveal revealDelay={200} sizes="(min-width: 768px) 55vw, 100vw" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <StoryPhotos />
 
       <section
         aria-labelledby="values-title"

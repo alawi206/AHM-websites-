@@ -4,6 +4,8 @@ import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
 import { Eyebrow, RevealWords, revealDelay } from '../components/ui'
 import { business } from '../data/business'
+import type { SlotId } from '../data/media'
+import { hasPhoto } from '../lib/photos'
 
 // Occasions named on sofratg.com (homepage catering section and the
 // "Groups and Parties" page).
@@ -30,6 +32,24 @@ const steps = [
     text: 'Set the date, invite your guests, and let Sofra take care of the table.',
   },
 ]
+
+/** Card header: the photo when one exists, otherwise a slim ornamental crest. */
+function CardMedia({ slot, number }: { slot: SlotId; number: string }) {
+  if (hasPhoto(slot)) {
+    return (
+      <div className="relative aspect-[16/10]">
+        <Photo slot={slot} sizes="(min-width: 1024px) 45vw, 100vw" />
+      </div>
+    )
+  }
+  return (
+    <div className="flex items-center gap-4 border-t-2 border-gold px-7 pt-8 text-gold-deep sm:px-10 sm:pt-10" aria-hidden="true">
+      <span className="eyebrow text-[0.62rem] tabular-nums">{number}</span>
+      <span className="h-px flex-1 bg-gold/40" />
+      <StarMotif size={18} strokeWidth={1.6} />
+    </div>
+  )
+}
 
 export function CateringPage() {
   return (
@@ -133,9 +153,7 @@ export function CateringPage() {
           </h2>
           <div className="mt-10 grid gap-6 lg:grid-cols-2 lg:gap-8">
             <article className="flex flex-col bg-ivory" data-reveal>
-              <div className="relative aspect-[16/10]">
-                <Photo slot="catering-main" sizes="(min-width: 1024px) 45vw, 100vw" />
-              </div>
+              <CardMedia slot="catering-main" number="01" />
               <div className="flex flex-1 flex-col p-7 sm:p-10">
                 <h3 className="font-display text-display-md">Catering for your event</h3>
                 <p className="mt-4 max-w-md flex-1 text-ink-soft">
@@ -149,9 +167,7 @@ export function CateringPage() {
               </div>
             </article>
             <article className="flex flex-col bg-ivory" data-reveal style={revealDelay(120)}>
-              <div className="relative aspect-[16/10]">
-                <Photo slot="story-hero" sizes="(min-width: 1024px) 45vw, 100vw" />
-              </div>
+              <CardMedia slot="story-hero" number="02" />
               <div className="flex flex-1 flex-col p-7 sm:p-10">
                 <h3 className="font-display text-display-md">Group dining at Sofra</h3>
                 <p className="mt-4 max-w-md flex-1 text-ink-soft">

@@ -31,7 +31,11 @@ for (const [path, preview] of Object.entries(previews)) {
   if (entry) entry.preview = preview
 }
 
-/** Resolve a slot to its photo, following `fallback` links between slots. */
+/**
+ * Resolve a slot to its photo, following `fallback` links between slots.
+ * `slot` is the slot the photo actually belongs to, so its alt text and crop
+ * describe the image that is shown.
+ */
 export function resolvePhoto(id: SlotId) {
   const seen = new Set<SlotId>()
   let current: SlotId | undefined = id
@@ -44,4 +48,15 @@ export function resolvePhoto(id: SlotId) {
   return undefined
 }
 
-export const suppliedPhotoCount = bySlot.size
+export const hasPhoto = (id: SlotId) => resolvePhoto(id) !== undefined
+
+// Development only: list the slots that still need an authorized photo.
+if (import.meta.env.DEV) {
+  const missing = (Object.keys(photoSlots) as SlotId[]).filter((id) => !bySlot.has(id))
+  if (missing.length) {
+    console.info(
+      `[Sofra] ${missing.length} photo slots have no file in src/assets/photos (see src/data/media.ts):\n` +
+        missing.map((id) => `  ${id}  —  ${photoSlots[id].label}`).join('\n'),
+    )
+  }
+}

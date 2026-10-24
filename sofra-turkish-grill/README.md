@@ -9,10 +9,13 @@ A premium, mobile-first redesign of [sofratg.com](https://sofratg.com/) for **So
 - **Output:** every page is prerendered to static HTML (fast first paint, full SEO), then hydrated.
   Deploys to any static host.
 
-> **Demo status:** the site uses Sofra's real business details, menu and reviews, but **no photography
-> yet**. Every image slot shows a clearly labelled "Photo awaiting approval" placeholder until an
-> owner-authorized photo is added (see [Photos](#photos)). See the
-> [owner approval checklist](#before-launch--owner-approval-checklist) before going live.
+> **Photography status:** the site uses Sofra's real business details, menu and reviews. It
+> contains **no food photography yet**: no authorized originals could be retrieved while building
+> (see [Photos](#photos)). The site is designed to look finished without them. Dishes are presented
+> as text-led menu cards, and the large atmospheric areas use typographic art panels. Visitors
+> never see a placeholder or "awaiting" notice. Each photo appears automatically once its file is
+> added. See the [owner approval checklist](#before-launch--owner-approval-checklist) before going
+> live.
 
 ---
 
@@ -88,14 +91,32 @@ slots.
 **Minimum set for a strong demo:** `hero`, `welcome-main`, `welcome-detail`, the six `dish-*`
 photos and `catering-main`. The fallbacks fill most other slots automatically.
 
+**How the site behaves while a photo is missing** (nothing tells the visitor a photo is missing):
+
+| Where | Without a photo | With a photo |
+| --- | --- | --- |
+| Signature dishes (home and menu page) | Framed menu cards (number, category, name, price) alternating ivory and espresso | That dish's card shows its photo in an arch medallion. Once **all six** dishes have photos, the home section switches to a full photo grid. |
+| Full menu | Text menu with dotted price leaders; signature dishes marked with a gold star | Unchanged (the menu stays text-led) |
+| Home hero, page heroes | Ember-toned art panel with the Turkish lattice behind the headline | Full-bleed photo with a dark gradient for legibility |
+| Welcome arch, catering arch, "Sofra Experience" chapters | Typographic art: a Turkish word and its meaning (*Hoş geldiniz* — Welcome, *Afiyet olsun* — Enjoy your meal, *Ateş* — Fire, *Fırın* — Oven, *Sofra* — The table, *Çay* — Tea) | Photo |
+| Welcome and catering insets, Our Story photo pair, Catering page card headers | Left out; the layout closes up | Photo |
+
+`npm run dev` logs the slots that still have no file. The words and tones for the art panels are set
+per slot in `media.ts` (`art`, `tone`).
+
 Rules:
 
 - Only use photos Sofra owns or has authorized. Never use photos from other restaurants or stock
   photos presented as Sofra.
 - Only place a photo in a `dish-*` slot once it has been **positively identified** as that dish.
 - After adding a photo, check its `alt` text and crop (`position` / `mobilePosition`) in `media.ts`.
-- To hide the "Photo awaiting approval" captions, set `SHOW_PLACEHOLDER_LABELS = false` in
-  `media.ts`. Keep them on while any placeholder is visible to the client.
+  When a slot borrows another slot's photo (`fallback`), the alt text and crop of the photo's own
+  slot are used, so the description always matches the image.
+
+**Dishes that still need original photos:** all of them. No authorized photo of any menu item is in
+the project yet. Priority: Lamb Chops, Iskender Kebab, Manti, Mix Meat Pide, Shashlik Kebab and
+Baklava (the six signature dishes), then the hero table spread and the dining room. Customer photos
+on Yelp, Google or delivery apps belong to the people who took them, so they are not used.
 
 ### Logo
 
@@ -171,7 +192,7 @@ and `robots.txt`.
 
 - **Lighthouse (mobile, simulated slow 4G):** Home 98 / 100 / 100 / 100, Menu 100 / 100 / 100 / 100,
   Catering 100 / 100 / 100 / 100 (Performance / Accessibility / Best Practices / SEO). CLS 0 on all
-  pages. These were measured with placeholders and the Google map embed blocked, so re-run once real
+  pages. These were measured without photography and with the Google map embed blocked, so re-run once real
   photos are in, because the hero photo becomes the LCP element.
 - **axe-core** (WCAG 2.1 A/AA and best practices): 0 violations on every page at 1440px and 390px.
 - **No horizontal overflow** at 1440, 390 and 360px, and no console or hydration errors.
@@ -186,7 +207,8 @@ environment could not load sofratg.com or the booking systems directly, so these
 owner's confirmation:
 
 1. **Photography.** Permission to use Sofra's existing photos (from sofratg.com, Instagram or new
-   shoots) and the files themselves. All 21 slots are currently placeholders.
+   shoots) and the files themselves. All 21 slots are currently empty; the site shows text and art
+   layouts in their place.
 2. **Logo.** The official logo files, or approval of the typographic wordmark.
 3. **Hours.** sofratg.com publishes "daily 10 AM – 9 PM", but third-party listings differ (delivery
    apps show earlier closing). Confirm, including holiday hours. A breakfast service window

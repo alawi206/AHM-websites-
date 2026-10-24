@@ -342,7 +342,7 @@
     }
   }
 
-  /* Placeholder art for photo slots awaiting approval --------------------- */
+  /* Art panels shown in large photo slots until a photo is supplied ------- */
   .ph {
     position: absolute;
     inset: 0;

@@ -4,31 +4,35 @@
  * Every image on the site is a named slot. To fill one, add an
  * owner-authorized photo to `src/assets/photos/` named after the slot id
  * (e.g. `hero.jpg`, `dish-iskender.jpg`). The build resizes it and converts it
- * to AVIF / WebP / JPEG automatically. Until a photo is supplied the slot
- * renders a clearly labelled "awaiting approval" placeholder.
+ * to AVIF / WebP / JPEG automatically.
+ *
+ * Until a photo is supplied, nothing on the site says so: dish slots fall back
+ * to text-only menu layouts, supporting images are simply left out, and the
+ * large atmospheric slots show a typographic art panel (`art`) in the brand
+ * palette. The dev server logs which slots are still empty.
  *
  * Dish slots must only receive a photo that has been positively identified as
  * that dish. Review each `alt` text against the final photo.
  */
 
-export type PlaceholderTone = 'ember' | 'olive' | 'espresso' | 'sand'
+export type ArtTone = 'ember' | 'olive' | 'espresso' | 'sand'
 
 export interface PhotoSlot {
-  /** What the photo should show — used on the placeholder and in the README. */
+  /** What the photo should show (for the team — never shown to visitors). */
   label: string
   alt: string
   /** object-position on desktop, and optionally a separate mobile crop. */
   position?: string
   mobilePosition?: string
-  tone: PlaceholderTone
+  /** Palette for the art panel shown while no photo exists. */
+  tone: ArtTone
+  /** Optional Turkish word set in the art panel, with its English meaning. */
+  art?: { word: string; meaning: string }
   /** Borrow another slot's photo when this one has not been supplied. */
   fallback?: SlotId
 }
 
 type SlotDefinition = Omit<PhotoSlot, 'fallback'> & { fallback?: string }
-
-/** Show the "awaiting approval" caption on placeholders (keep on for demos). */
-export const SHOW_PLACEHOLDER_LABELS = true
 
 const slots = {
   hero: {
@@ -42,6 +46,7 @@ const slots = {
     label: 'Dining room, warmly lit',
     alt: 'The dining room at Sofra Turkish Grill',
     tone: 'olive',
+    art: { word: 'Hoş geldiniz', meaning: 'Welcome' },
   },
   'welcome-detail': {
     label: 'Turkish coffee or tea service',
@@ -60,31 +65,36 @@ const slots = {
     label: 'Kebabs and shashlik on the grill',
     alt: 'Kebabs cooking on the grill at Sofra',
     tone: 'ember',
+    art: { word: 'Ateş', meaning: 'Fire' },
     fallback: 'dish-shashlik',
   },
   'experience-pide': {
     label: 'Pide fresh from the oven',
     alt: 'Freshly baked pide at Sofra',
     tone: 'espresso',
+    art: { word: 'Fırın', meaning: 'Oven' },
     fallback: 'dish-mix-meat-pide',
   },
   'experience-table': {
     label: 'Guests sharing a full table',
     alt: 'Guests sharing dishes around the table at Sofra',
     tone: 'olive',
+    art: { word: 'Sofra', meaning: 'The table' },
     fallback: 'hero',
   },
   'experience-welcome': {
     label: 'Turkish tea and coffee',
     alt: 'Turkish tea and coffee at Sofra',
     tone: 'ember',
+    art: { word: 'Çay', meaning: 'Tea' },
     fallback: 'welcome-detail',
   },
 
   'catering-main': {
     label: 'Catering spread for an event',
     alt: 'A Sofra catering spread prepared for an event',
-    tone: 'olive',
+    tone: 'espresso',
+    art: { word: 'Afiyet olsun', meaning: 'Enjoy your meal' },
     fallback: 'hero',
   },
   'catering-detail': {
