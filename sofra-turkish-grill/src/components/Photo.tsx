@@ -116,9 +116,9 @@ function Placeholder({
       <div className="pattern-girih" />
       {hero && (
         <StarMotif
-          size={560}
-          strokeWidth={0.16}
-          className="absolute left-[78%] top-[42%] -translate-x-1/2 -translate-y-1/2 opacity-25"
+          size={420}
+          strokeWidth={0.18}
+          className="absolute left-[76%] top-[35%] -translate-x-1/2 -translate-y-1/2 opacity-25"
         />
       )}
       <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_45%,transparent_40%,rgb(0_0_0/0.35))]" />
