@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#241B16" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script>
+      // Enable scroll-reveal styles only when JavaScript runs; fall back to
+      // fully visible content if the app has not started within 4 seconds.
+      document.documentElement.classList.add('js')
+      setTimeout(function () {
+        if (!window.__sofraReady) document.documentElement.classList.remove('js')
+      }, 4000)
+    </script>
+    <!--head-->
+    <title>Sofra Turkish Grill | Authentic Turkish Restaurant in Kent, WA</title>
+  </head>
+  <body>
+    <div id="root"><!--app--></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
