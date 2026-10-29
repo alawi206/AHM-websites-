@@ -1,0 +1,189 @@
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+@import '@fontsource/instrument-serif/400.css';
+@import '@fontsource/instrument-serif/400-italic.css';
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #0b0c0e;
+  --color-ink-2: #101114;
+  --color-coal: #17191d;
+  --color-coal-2: #1e2126;
+  --color-bone: #f6f5f2;
+  --color-silver: #a7aab1;
+  --color-mist: #70747c;
+  --color-champagne: #cdb78e;
+  --color-champagne-soft: #e2d4b6;
+  --color-line: rgb(246 245 242 / 0.1);
+  --color-line-strong: rgb(246 245 242 / 0.18);
+
+  --font-display: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-sans: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-xs: 25rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-ink);
+    overflow-x: clip;
+    min-height: 100svh;
+  }
+
+  ::selection {
+    background: var(--color-champagne);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--color-champagne);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  img {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}
+
+@layer components {
+  /* Expanded heavy grotesque used for every headline. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 118%;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 0.9;
+  }
+
+  .display-tight {
+    font-stretch: 100%;
+  }
+
+  .serif-accent {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+
+  /* Small uppercase label used for eyebrows, indices and meta text. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .hairline {
+    background: linear-gradient(90deg, transparent, var(--color-line-strong) 20%, var(--color-line-strong) 80%, transparent);
+    height: 1px;
+  }
+
+  /* Brushed-metal text treatment for oversized numerals. */
+  .metal-text {
+    background: linear-gradient(180deg, #ffffff 0%, #d9d8d4 38%, #8d9097 62%, #e9e7e2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(246 245 242 / 0.28);
+  }
+
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes scrollcue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
