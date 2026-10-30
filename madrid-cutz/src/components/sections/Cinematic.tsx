@@ -35,7 +35,7 @@ export function Cinematic() {
               Look sharp.
             </motion.span>
             <motion.span className="block" style={{ y: secondY, opacity: secondOpacity }}>
-              <span className="serif-accent text-[1.04em] text-champagne-soft">Feel</span> different.
+              <span className="gold-text">Feel</span> different.
             </motion.span>
           </motion.h2>
         </div>

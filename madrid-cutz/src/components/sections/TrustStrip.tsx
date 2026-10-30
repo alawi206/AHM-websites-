@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { animate, useInView, useReducedMotion } from 'motion/react'
-import { MapPin, Scissors } from 'lucide-react'
-import { barbers, business, reputation } from '../../content/site'
+import { Crown, MapPin, Scissors } from 'lucide-react'
+import { business, reputation } from '../../content/site'
 import { Reveal } from '../ui/Reveal'
 import { Stars } from '../ui/primitives'
 
@@ -52,22 +52,27 @@ export function TrustStrip() {
       detail: <span>Client reviews on {reputation.source}</span>,
     },
     {
-      // Derived from the roster in content/site.ts, so it always matches the Barbers section.
-      label: 'The team',
-      value: <CountUp to={barbers.length} />,
+      // Badge shown on the shop's Booksy profile (see docs/CONTENT.md).
+      label: 'Status',
+      value: (
+        <span className="inline-flex items-center">
+          <Crown className="size-[0.85em] text-gold" strokeWidth={1.25} aria-hidden="true" />
+          <span className="sr-only">Booksy Recommended</span>
+        </span>
+      ),
       detail: (
         <span className="flex items-center gap-2">
-          <Scissors className="size-3.5 text-champagne" strokeWidth={1.5} aria-hidden="true" />
-          Professional barbers
+          <Scissors className="size-3.5 text-gold" strokeWidth={1.5} aria-hidden="true" />
+          {reputation.badge}
         </span>
       ),
     },
     {
       label: 'Location',
-      value: <span className="[font-stretch:100%]">{business.city}</span>,
+      value: <span>{business.city}</span>,
       detail: (
         <span className="flex items-center gap-2">
-          <MapPin className="size-3.5 text-champagne" strokeWidth={1.5} aria-hidden="true" />
+          <MapPin className="size-3.5 text-gold" strokeWidth={1.5} aria-hidden="true" />
           {business.address.street}, {business.regionShort}
         </span>
       ),
@@ -88,9 +93,9 @@ export function TrustStrip() {
           >
             <p className="eyebrow mb-4 flex items-center justify-between text-mist">
               <span>{item.label}</span>
-              <span className="text-champagne/70">0{i + 1}</span>
+              <span className="text-gold/70">0{i + 1}</span>
             </p>
-            <p className="display text-[8.5vw] leading-none text-bone lg:text-[4vw] 2xl:text-[4.5rem]">{item.value}</p>
+            <p className="display chrome-text text-[8vw] leading-none lg:text-[4vw] 2xl:text-[4.5rem]">{item.value}</p>
             <div className="mt-4 text-xs text-silver sm:text-sm">{item.detail}</div>
           </Reveal>
         ))}

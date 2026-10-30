@@ -4,12 +4,12 @@ import { ArrowUpRight, Expand } from 'lucide-react'
 import overhead from '../../assets/art/ceiling-overhead.jpg?w=500;900&format=avif;webp&as=picture'
 import angle from '../../assets/art/ceiling-angle.jpg?w=500;900&format=avif;webp&as=picture'
 import { workCategories, workPhotos, type Photo } from '../../content/media'
-import { BOOKSY_URL } from '../../content/site'
+import { BOOKSY_URL, reputation, socials } from '../../content/site'
 import { useMediaQuery } from '../../hooks'
 import { track } from '../../lib/analytics'
 import { BookLink } from '../ui/BookLink'
 import { Reveal, RevealLines } from '../ui/Reveal'
-import { Eyebrow, Picture } from '../ui/primitives'
+import { Eyebrow, InstagramGlyph, Picture } from '../ui/primitives'
 import { Lightbox } from './Lightbox'
 
 const EASE = [0.16, 1, 0.3, 1] as const
@@ -93,25 +93,43 @@ const FALLBACK_TILES = [
  * implies these renders are client work — it sends people to the live
  * portfolio on Booksy instead.
  */
+const instagram = socials.find((s) => s.label === 'Instagram' && s.verified)
+
 function PortfolioFallback() {
   return (
     <div className="grid grid-cols-1 gap-3 md:gap-5 lg:grid-cols-12">
       <Reveal className="flex flex-col justify-between gap-10 rounded-[3px] border border-line bg-coal p-7 md:p-10 lg:col-span-5">
         <div>
-          <p className="eyebrow text-champagne">The portfolio</p>
-          <p className="display mt-6 text-4xl leading-[0.95] md:text-5xl">
-            Fresh work,
-            <br />
-            <span className="serif-accent text-champagne-soft">straight from</span> the chair.
+          <p className="eyebrow text-gold">The portfolio</p>
+          <p className="display mt-6 text-4xl leading-none md:text-5xl">
+            <span className="chrome-text block">Fresh work,</span>
+            <span className="block">
+              <span className="gold-text">straight from</span> <span className="chrome-text">the chair.</span>
+            </span>
           </p>
           <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed text-silver">
-            Browse the latest fades, tapers and beard work from the Madrid Cutz barbers on the shop&rsquo;s Booksy profile — then
-            book the barber whose work you like best.
+            {reputation.portfolioDisplay} photos of fades, tapers and beard work live on the Madrid Cutz Booksy profile. Browse
+            them, then book the barber whose work you like best.
           </p>
         </div>
-        <BookLink placement="gallery-fallback" variant="ghost" size="md" className="self-start">
-          See the latest work
-        </BookLink>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+          <BookLink placement="gallery-fallback" variant="ghost" size="md">
+            See the latest work
+          </BookLink>
+          {instagram && (
+            <a
+              href={instagram.href}
+              target="_blank"
+              rel="noopener"
+              onClick={() => track('social_click', { network: 'Instagram', placement: 'gallery' })}
+              className="inline-flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-silver uppercase transition-colors hover:text-gold-soft"
+            >
+              <InstagramGlyph className="size-4 text-gold" />
+              {instagram.handle}
+              <span className="sr-only">on Instagram (opens in a new tab)</span>
+            </a>
+          )}
+        </div>
       </Reveal>
       <div className="grid grid-cols-2 gap-3 md:gap-5 lg:col-span-7">
         {FALLBACK_TILES.map((tile, i) => (
@@ -132,7 +150,7 @@ function PortfolioFallback() {
                 imgStyle={{ objectPosition: tile.position, transform: `scale(${tile.scale})`, transformOrigin: tile.position }}
               />
               <span className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-              <span className="absolute top-4 left-4 font-mono text-[0.6875rem] text-champagne md:top-5 md:left-5">0{i + 1}</span>
+              <span className="absolute top-4 left-4 font-mono text-[0.6875rem] text-gold md:top-5 md:left-5">0{i + 1}</span>
               <span className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-2 md:inset-x-5 md:bottom-5">
                 <span className="display text-xl leading-none sm:text-2xl md:text-3xl">{tile.label}</span>
                 <ArrowUpRight
@@ -182,7 +200,7 @@ export function Gallery() {
               lines={[
                 'The work',
                 <>
-                  speaks <span className="serif-accent text-[1.02em] text-champagne-soft">for</span> itself.
+                  speaks <span className="gold-text">for</span> itself.
                 </>,
               ]}
               label="The work speaks for itself."

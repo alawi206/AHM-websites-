@@ -2,7 +2,7 @@ import { ArrowUp, ArrowUpRight } from 'lucide-react'
 import { BOOKSY_URL, business, nav, socials } from '../../content/site'
 import { track } from '../../lib/analytics'
 import { BookLink } from '../ui/BookLink'
-import { Wordmark } from './Nav'
+import { BrandLogo } from '../ui/BrandLogo'
 
 export function Footer() {
   const verifiedSocials = socials.filter((s) => s.verified)
@@ -13,7 +13,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-5 lg:col-span-4">
-            <Wordmark />
+            <BrandLogo sizes="160px" className="w-32 md:w-36" alt="Madrid Cutz" />
             <p className="mt-6 max-w-xs text-sm leading-relaxed text-silver">
               Precision haircuts, fades and beard work in Auburn, Washington.
             </p>
@@ -49,7 +49,7 @@ export function Footer() {
               target="_blank"
               rel="noopener"
               onClick={() => track('directions_click', { placement: 'footer' })}
-              className="mt-4 inline-flex items-center gap-1.5 text-sm text-bone underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-champagne"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm text-bone underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-gold"
             >
               Get directions <ArrowUpRight className="size-3.5" strokeWidth={1.5} />
               <span className="sr-only">(opens Google Maps in a new tab)</span>
@@ -91,8 +91,8 @@ export function Footer() {
       </div>
 
       <div aria-hidden="true" className="relative mt-20 select-none md:mt-28">
-        <p className="display text-center text-[12.4vw] leading-[0.8] tracking-[-0.035em] whitespace-nowrap [font-stretch:105%]">
-          <span className="bg-gradient-to-b from-bone/20 via-bone/[0.07] to-transparent bg-clip-text text-transparent">
+        <p className="display text-center text-[11vw] leading-[0.8] whitespace-nowrap">
+          <span className="bg-gradient-to-b from-gold/30 via-gold/[0.08] to-transparent bg-clip-text text-transparent">
             Madrid Cutz
           </span>
         </p>

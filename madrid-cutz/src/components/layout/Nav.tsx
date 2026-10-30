@@ -3,16 +3,23 @@ import { AnimatePresence, motion } from 'motion/react'
 import { announcement, business, nav, reputation } from '../../content/site'
 import { useActiveSection, useLockBody, useScrollState } from '../../hooks'
 import { BookLink } from '../ui/BookLink'
-import { HexMark, Stars } from '../ui/primitives'
+import { BrandLogo } from '../ui/BrandLogo'
+import { Stars } from '../ui/primitives'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
 export function Wordmark({ className = '' }: { className?: string }) {
   return (
-    <a href="#top" className={`group flex items-center gap-2.5 ${className}`} aria-label="Madrid Cutz — back to top">
-      <HexMark className="size-6 text-bone transition-transform duration-700 ease-out-expo group-hover:rotate-[60deg]" />
-      <span className="font-display text-[0.9375rem] font-extrabold tracking-[0.06em] whitespace-nowrap uppercase [font-stretch:125%]">
-        Madrid <span className="text-silver">Cutz</span>
+    <a href="#top" className={`group flex items-center gap-3 ${className}`} aria-label="Madrid Cutz — back to top">
+      <BrandLogo
+        sizes="48px"
+        alt=""
+        className="w-10 transition-transform duration-700 ease-out-expo group-hover:scale-105 md:w-12"
+      />
+      {/* Same lockup as the logo: chrome serif over tracked gold caps. */}
+      <span aria-hidden="true" className="flex flex-col items-center leading-none">
+        <span className="display chrome-text text-[1.05rem] tracking-[0.06em] md:text-[1.15rem]">Madrid</span>
+        <span className="label mt-1 pl-[0.6em] text-[0.5rem] tracking-[0.6em] text-gold">Cutz</span>
       </span>
     </a>
   )
@@ -101,7 +108,7 @@ export function Nav() {
               href={announcement.href}
               target="_blank"
               rel="noopener"
-              className="block border-b border-line bg-champagne px-5 py-2 text-center text-[0.6875rem] font-semibold tracking-[0.14em] text-ink uppercase"
+              className="block border-b border-line bg-gold px-5 py-2 text-center text-[0.6875rem] font-semibold tracking-[0.14em] text-ink uppercase"
             >
               {announcement.text} <span className="underline underline-offset-2">{announcement.cta}</span>
             </a>
@@ -126,7 +133,7 @@ export function Nav() {
                     >
                       {item.label}
                       <span
-                        className={`absolute right-4 bottom-1 left-4 h-px origin-left bg-champagne transition-transform duration-500 ease-out-expo ${
+                        className={`absolute right-4 bottom-1 left-4 h-px origin-left bg-gold transition-transform duration-500 ease-out-expo ${
                           isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                         }`}
                       />
@@ -201,8 +208,8 @@ export function Nav() {
                       animate={{ y: '0%' }}
                       transition={{ duration: 0.8, ease: EASE, delay: 0.25 + i * 0.06 }}
                     >
-                      <span className="font-mono text-[0.6875rem] text-champagne">0{i + 1}</span>
-                      <span className="display text-[13vw] leading-[0.95] xs:text-5xl">{item.label}</span>
+                      <span className="font-mono text-[0.6875rem] text-gold">0{i + 1}</span>
+                      <span className="display chrome-text text-[12vw] leading-[1.05] xs:text-5xl">{item.label}</span>
                     </motion.a>
                   </li>
                 ))}

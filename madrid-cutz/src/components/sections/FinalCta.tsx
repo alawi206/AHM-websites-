@@ -4,6 +4,7 @@ import ceilingWide from '../../assets/art/ceiling-wide.jpg?w=900;1600;2400&forma
 import { reputation } from '../../content/site'
 import { BookLink } from '../ui/BookLink'
 import { Reveal, RevealLines } from '../ui/Reveal'
+import { BrandLogo } from '../ui/BrandLogo'
 import { Eyebrow, Picture, Stars } from '../ui/primitives'
 
 export function FinalCta() {
@@ -30,6 +31,9 @@ export function FinalCta() {
       />
 
       <div className="mx-auto flex max-w-[1600px] flex-col items-center px-5 text-center md:px-10">
+        <Reveal y={20} className="mb-10 w-28 md:w-36">
+          <BrandLogo sizes="150px" shine glow alt="Madrid Cutz" />
+        </Reveal>
         <Reveal>
           <Eyebrow index="08">Book</Eyebrow>
         </Reveal>
@@ -38,12 +42,12 @@ export function FinalCta() {
           lines={[
             'Your next',
             <>
-              great <span className="serif-accent text-[1.04em] text-champagne-soft">cut</span>
+              great <span className="gold-text">cut</span>
             </>,
             'starts here.',
           ]}
           label="Your next great cut starts here."
-          className="display mt-8 text-[13.5vw] leading-[0.86] sm:text-8xl lg:text-[8.5rem] xl:text-[10rem]"
+          className="display mt-8 text-[12vw] leading-[0.92] sm:text-8xl lg:text-[7.5rem] xl:text-[8.5rem]"
         />
         <Reveal delay={0.2}>
           <p className="mx-auto mt-10 max-w-md text-base leading-relaxed text-silver md:text-lg">

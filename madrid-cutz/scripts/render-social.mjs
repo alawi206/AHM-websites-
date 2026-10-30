@@ -1,7 +1,9 @@
 /**
- * Captures the social share image (public/og-image.jpg) from the live hero and
- * rasterises the favicon into public/apple-touch-icon.png.
- * Usage: npm run dev (in another terminal), then `node scripts/render-social.mjs`.
+ * Generates the share image and app icons from the live site and the logo:
+ *   public/og-image.jpg        1200×630 social card (captured from the hero)
+ *   public/favicon-32.png      browser tab icon (transparent)
+ *   public/apple-touch-icon.png, icon-192.png, icon-512.png  (on the brand black)
+ * Usage: npm run dev (in another terminal), then `npm run render:social`.
  */
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
@@ -10,8 +12,10 @@ import fs from 'node:fs'
 
 const { chromium } = await import('playwright').catch(() => createRequire(import.meta.url)('playwright'))
 
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const PUBLIC = path.join(ROOT, 'public')
+const LOGO = path.join(ROOT, 'src/assets/brand/madrid-cutz-logo.png')
 const BASE = process.env.RENDER_BASE ?? 'http://localhost:5173/'
-const PUBLIC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../public')
 
 const browser = await chromium.launch({
   args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
@@ -24,19 +28,31 @@ const og = await browser.newPage({
   reducedMotion: 'reduce',
 })
 await og.goto(BASE, { waitUntil: 'networkidle' })
-// A share card, not a screenshot: keep the rating, headline and lights; drop copy, buttons and nav links.
+// A share card, not a screenshot: the centred hero minus the nav links.
 await og.evaluate(() => {
-  document.querySelector('#top a[href="#work"]')?.closest('.grid')?.setAttribute('style', 'display:none')
   document.querySelector('nav[aria-label="Primary"] ul')?.setAttribute('style', 'visibility:hidden')
 })
-await og.waitForTimeout(2500)
+await og.waitForTimeout(3000)
 await og.screenshot({ path: path.join(PUBLIC, 'og-image.jpg'), type: 'jpeg', quality: 88 })
 console.log('rendered og-image.jpg')
 
-const icon = await browser.newPage({ viewport: { width: 180, height: 180 }, deviceScaleFactor: 1 })
-const svg = fs.readFileSync(path.join(PUBLIC, 'favicon.svg'), 'utf8').replace('rx="14"', 'rx="0"')
-await icon.setContent(`<body style="margin:0">${svg.replace('<svg ', '<svg width="180" height="180" ')}</body>`)
-await icon.screenshot({ path: path.join(PUBLIC, 'apple-touch-icon.png') })
-console.log('rendered apple-touch-icon.png')
+const logo = `data:image/png;base64,${fs.readFileSync(LOGO).toString('base64')}`
+const ICONS = [
+  { file: 'favicon-32.png', size: 32, pad: 0, bg: 'transparent' },
+  { file: 'apple-touch-icon.png', size: 180, pad: 12, bg: '#0b0c0e' },
+  { file: 'icon-192.png', size: 192, pad: 10, bg: '#0b0c0e' },
+  { file: 'icon-512.png', size: 512, pad: 26, bg: '#0b0c0e' },
+]
+for (const icon of ICONS) {
+  const page = await browser.newPage({ viewport: { width: icon.size, height: icon.size }, deviceScaleFactor: 1 })
+  const inner = icon.size - icon.pad * 2
+  await page.setContent(
+    `<body style="margin:0;background:${icon.bg}"><img src="${logo}" style="display:block;width:${inner}px;height:${inner}px;margin:${icon.pad}px;object-fit:contain"></body>`,
+  )
+  await page.waitForFunction(() => document.querySelector('img')?.complete)
+  await page.screenshot({ path: path.join(PUBLIC, icon.file), omitBackground: icon.bg === 'transparent' })
+  console.log('rendered', icon.file)
+  await page.close()
+}
 
 await browser.close()

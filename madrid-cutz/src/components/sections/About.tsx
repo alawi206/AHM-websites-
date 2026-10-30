@@ -79,7 +79,7 @@ export function About() {
             lines={[
               'More than',
               <>
-                <span className="serif-accent text-[1.05em] text-champagne-soft">a</span> haircut.
+                <span className="gold-text">a</span> haircut.
               </>,
             ]}
             id="about-title"
@@ -107,9 +107,9 @@ export function About() {
                 y={16}
                 className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-5"
               >
-                <span className="font-mono text-xs text-champagne">0{i + 1}</span>
+                <span className="font-mono text-xs text-gold">0{i + 1}</span>
                 <div>
-                  <p className="font-display text-sm font-bold tracking-[0.14em] uppercase [font-stretch:115%]">{p.title}</p>
+                  <p className="font-wide text-sm font-bold tracking-[0.14em] uppercase [font-stretch:125%]">{p.title}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-silver">{p.text}</p>
                 </div>
               </Reveal>

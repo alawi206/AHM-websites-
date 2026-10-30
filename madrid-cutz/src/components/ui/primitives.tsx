@@ -17,13 +17,20 @@ export function HexMark({ className = '', strokeWidth = 1.6 }: { className?: str
   )
 }
 
+/** Minimal camera glyph (Lucide no longer ships brand icons). */
+export function InstagramGlyph({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className={className} aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.25" cy="6.75" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
 export function Stars({ className = '', size = 'size-3.5', count = 5 }: { className?: string; size?: string; count?: number }) {
   return (
-    <span
-      className={`inline-flex items-center gap-0.5 text-champagne ${className}`}
-      role="img"
-      aria-label={`${count} out of 5 stars`}
-    >
+    <span className={`inline-flex items-center gap-0.5 text-gold ${className}`} role="img" aria-label={`${count} out of 5 stars`}>
       {Array.from({ length: 5 }, (_, i) => (
         <Star
           key={i}
@@ -40,7 +47,7 @@ export function Stars({ className = '', size = 'size-3.5', count = 5 }: { classN
 export function Eyebrow({ index, children, className = '' }: { index?: string; children: ReactNode; className?: string }) {
   return (
     <p className={`eyebrow flex items-center gap-3 text-silver ${className}`}>
-      {index && <span className="text-champagne">{index}</span>}
+      {index && <span className="text-gold">{index}</span>}
       {index && <span aria-hidden="true" className="h-px w-8 bg-line-strong" />}
       <span>{children}</span>
     </p>

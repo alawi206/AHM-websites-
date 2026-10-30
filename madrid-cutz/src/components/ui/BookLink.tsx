@@ -25,8 +25,9 @@ const SIZES: Record<Size, string> = {
 }
 
 const VARIANTS: Record<Variant, string> = {
-  primary: 'bg-bone text-ink hover:text-ink',
-  ghost: 'border border-line-strong text-bone hover:border-bone/60 backdrop-blur-sm bg-ink/20',
+  primary:
+    'gold-surface text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(90,60,10,0.45),0_10px_30px_-10px_rgba(227,178,76,0.55)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.6),inset_0_-1px_0_rgba(90,60,10,0.45),0_14px_40px_-8px_rgba(246,198,83,0.7)]',
+  ghost: 'border border-line-gold text-bone hover:border-gold hover:text-gold-soft backdrop-blur-sm bg-ink/30',
   text: 'text-bone',
 }
 
@@ -55,7 +56,7 @@ export function BookLink({
         <span className="relative">
           {children}
           <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-100 bg-current transition-transform duration-500 ease-out-expo group-hover:scale-x-0" />
-          <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-champagne transition-transform delay-150 duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100" />
+          <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-gold transition-transform delay-150 duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100" />
         </span>
         {icon && (
           <ArrowUpRight
@@ -74,12 +75,13 @@ export function BookLink({
       target="_blank"
       rel="noopener"
       onClick={() => track('book_click', { placement })}
-      className={`group relative inline-flex items-center justify-between overflow-hidden rounded-full font-semibold tracking-[0.16em] uppercase transition-[border-color,color,transform] duration-500 ease-out-expo active:scale-[0.98] ${SIZES[size]} ${VARIANTS[variant]} ${className}`}
+      className={`group relative inline-flex items-center justify-between overflow-hidden rounded-full font-semibold tracking-[0.16em] uppercase transition-[border-color,color,transform,box-shadow] duration-500 ease-out-expo active:scale-[0.98] ${SIZES[size]} ${VARIANTS[variant]} ${className}`}
     >
       {variant === 'primary' && (
+        // Polished-metal glint that runs across the button on hover.
         <span
           aria-hidden="true"
-          className="absolute inset-0 origin-left scale-x-0 bg-champagne transition-transform duration-700 ease-out-expo group-hover:scale-x-100"
+          className="absolute inset-y-0 -left-1/2 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/70 to-transparent opacity-0 transition-[transform,opacity] duration-700 ease-out-expo group-hover:translate-x-[320%] group-hover:opacity-100"
         />
       )}
       <span className="relative whitespace-nowrap">{children}</span>
@@ -88,7 +90,7 @@ export function BookLink({
           aria-hidden="true"
           className={`relative grid place-items-center overflow-hidden rounded-full ${
             size === 'xl' ? 'size-10 sm:size-12' : size === 'sm' ? 'size-6' : 'size-8'
-          } ${variant === 'primary' ? 'bg-ink text-bone' : 'bg-bone text-ink'}`}
+          } ${variant === 'primary' ? 'bg-ink text-gold-soft' : 'gold-surface text-ink'}`}
         >
           <ArrowUpRight
             className="size-[55%] transition-transform duration-500 ease-out-expo group-hover:translate-x-[150%] group-hover:-translate-y-[150%]"

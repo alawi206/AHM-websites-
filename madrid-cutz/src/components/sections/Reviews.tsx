@@ -90,7 +90,7 @@ export function Reviews() {
           lines={[
             'Reputation earned.',
             <>
-              <span className="serif-accent text-[1.02em] text-champagne-soft">Not</span> given.
+              <span className="gold-text">Not</span> given.
             </>,
           ]}
           label="Reputation earned. Not given."
@@ -101,7 +101,7 @@ export function Reviews() {
           <div className="lg:col-span-5">
             <Reveal>
               <p className="flex items-end gap-5">
-                <span className="display metal-text text-[9rem] leading-[0.78] [font-stretch:100%] sm:text-[12rem] xl:text-[15rem]">
+                <span className="display chrome-text text-[8rem] leading-[0.8] sm:text-[11rem] xl:text-[13.5rem]">
                   {reputation.rating.toFixed(1)}
                 </span>
               </p>
@@ -127,7 +127,7 @@ export function Reviews() {
             <div className="rounded-[3px] border border-line bg-ink/60 p-5 md:p-8">
               <div className="mb-6 flex items-center justify-between">
                 <p className="eyebrow text-silver">Every hexagon is a review</p>
-                <p className="font-mono text-[0.6875rem] text-champagne">{reputation.reviewCountDisplay}</p>
+                <p className="font-mono text-[0.6875rem] text-gold">{reputation.reviewCountDisplay}</p>
               </div>
               <ReviewHoneycomb />
               <div className="mt-6 flex items-center justify-between border-t border-line pt-5 font-mono text-[0.625rem] tracking-[0.16em] text-mist uppercase">
@@ -144,14 +144,14 @@ export function Reviews() {
               <Reveal as="li" key={`${review.name}-${i}`} delay={(i % 3) * 0.08} y={24}>
                 <figure className="flex h-full flex-col justify-between rounded-[3px] border border-line bg-ink/60 p-7 md:p-8">
                   <div>
-                    <span aria-hidden="true" className="serif-accent block text-6xl leading-none text-champagne">
+                    <span aria-hidden="true" className="block font-display text-6xl leading-none text-gold">
                       &ldquo;
                     </span>
                     <blockquote className="mt-2 text-lg leading-relaxed text-bone text-pretty">{review.text}</blockquote>
                   </div>
                   <figcaption className="mt-8 flex items-center justify-between border-t border-line pt-5">
                     <span>
-                      <span className="block font-display text-sm font-bold tracking-[0.12em] uppercase [font-stretch:115%]">
+                      <span className="block font-wide text-sm font-bold tracking-[0.12em] uppercase [font-stretch:125%]">
                         {review.name}
                       </span>
                       <span className="mt-1 block font-mono text-[0.625rem] tracking-[0.14em] text-mist uppercase">

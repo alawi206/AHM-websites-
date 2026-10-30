@@ -27,7 +27,7 @@ function CraftMarquee() {
             >
               {word}
             </span>
-            <HexMark className="size-5 shrink-0 text-champagne/60 md:size-6" />
+            <HexMark className="size-5 shrink-0 text-gold/60 md:size-6" />
           </span>
         ))}
       </div>
@@ -58,7 +58,7 @@ export function Services() {
               works.
             </p>
             <p className="mt-4 flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.12em] text-mist uppercase">
-              <Info className="size-3.5 text-champagne" strokeWidth={1.5} aria-hidden="true" />
+              <Info className="size-3.5 text-gold" strokeWidth={1.5} aria-hidden="true" />
               Live pricing &amp; availability on Booksy
             </p>
           </Reveal>
@@ -79,9 +79,7 @@ export function Services() {
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-[radial-gradient(520px_circle_at_var(--x,50%)_var(--y,50%),rgba(246,245,242,0.07),transparent_45%)]"
                 />
-                <span className="col-span-2 self-start pt-2 font-mono text-xs text-champagne md:col-span-1 md:pt-4">
-                  0{i + 1}
-                </span>
+                <span className="col-span-2 self-start pt-2 font-mono text-xs text-gold md:col-span-1 md:pt-4">0{i + 1}</span>
                 <h3 className="col-span-10 display text-[2.6rem] leading-[0.92] transition-transform duration-700 ease-out-expo group-hover:translate-x-2 sm:text-6xl md:col-span-5 xl:text-7xl">
                   {service.name}
                 </h3>
@@ -112,7 +110,7 @@ export function Services() {
                     <span className="relative grid size-12 place-items-center">
                       <svg
                         viewBox="0 0 48 48"
-                        className="absolute inset-0 size-full text-line-strong transition-colors duration-500 group-hover:text-bone"
+                        className="absolute inset-0 size-full text-line-strong transition-colors duration-500 group-hover:text-gold"
                         aria-hidden="true"
                       >
                         <path
@@ -122,7 +120,7 @@ export function Services() {
                           strokeWidth="1.25"
                         />
                       </svg>
-                      <span className="absolute inset-0 scale-50 rounded-full bg-bone/0 blur-xl transition-all duration-700 group-hover:scale-100 group-hover:bg-bone/15" />
+                      <span className="absolute inset-0 scale-50 rounded-full bg-bone/0 blur-xl transition-all duration-700 group-hover:scale-100 group-hover:bg-gold/25" />
                       <ArrowUpRight
                         className="relative size-4 transition-transform duration-500 ease-out-expo group-hover:rotate-45"
                         strokeWidth={1.5}

@@ -34,15 +34,17 @@ export const business = {
 export const fullAddress = `${business.address.street}, ${business.address.unit}, ${business.address.city}, ${business.address.state} ${business.address.zip}`
 
 /**
- * Booksy reputation. The screenshots supplied for this project show 5.0 stars
- * from 777 reviews; the site rounds down to "750+" so the copy stays true as
- * the live number moves. Re-check the live profile before launch.
+ * Booksy reputation, from the supplied Booksy screenshots: 5.0 stars, 777
+ * reviews, a "Booksy Recommended" badge and 150+ portfolio photos. The site
+ * rounds down ("750+", "150+") so the copy stays true as the live numbers move.
  */
 export const reputation = {
   rating: 5.0,
   reviewCountDisplay: '750+',
   reviewCountFloor: 750,
   source: 'Booksy',
+  badge: 'Booksy Recommended',
+  portfolioDisplay: '150+',
 } as const
 
 export type Verified<T> = { value: T; verified: boolean }
@@ -82,8 +84,8 @@ export const socials: Social[] = [
     label: 'Instagram',
     handle: '@madridcutz',
     href: 'https://www.instagram.com/madridcutz/',
-    // Handle supplied in the brief but not yet confirmed as the shop's account.
-    verified: false,
+    // Confirmed: the shop's own Booksy portfolio photos carry an "@madridcutz" watermark.
+    verified: true,
   },
   {
     label: 'Facebook',

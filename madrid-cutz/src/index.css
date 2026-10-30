@@ -1,10 +1,14 @@
 @import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource-variable/cinzel';
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/geist-mono';
-@import '@fontsource/instrument-serif/400.css';
-@import '@fontsource/instrument-serif/400-italic.css';
 @import 'tailwindcss';
 
+/*
+ * Brand system taken from the Madrid Cutz logo:
+ * chrome serif capitals ("MADRID"), brushed gold ("CUTZ", crown, clippers),
+ * wide-tracked caps for labels, and the white hexagon LED ceiling.
+ */
 @theme {
   --color-ink: #0b0c0e;
   --color-ink-2: #101114;
@@ -13,13 +17,16 @@
   --color-bone: #f6f5f2;
   --color-silver: #a7aab1;
   --color-mist: #70747c;
-  --color-champagne: #cdb78e;
-  --color-champagne-soft: #e2d4b6;
+  --color-gold: #e3b24c;
+  --color-gold-bright: #f6c653;
+  --color-gold-soft: #f8e6ad;
+  --color-gold-deep: #8a6a1e;
   --color-line: rgb(246 245 242 / 0.1);
   --color-line-strong: rgb(246 245 242 / 0.18);
+  --color-line-gold: rgb(227 178 76 / 0.35);
 
-  --font-display: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-display: 'Cinzel Variable', 'Cinzel', 'Trajan Pro', ui-serif, Georgia, serif;
+  --font-wide: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -54,12 +61,12 @@
   }
 
   ::selection {
-    background: var(--color-champagne);
+    background: var(--color-gold);
     color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 1.5px solid var(--color-champagne);
+    outline: 1.5px solid var(--color-gold);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -71,48 +78,68 @@
 }
 
 @layer components {
-  /* Expanded heavy grotesque used for every headline. */
+  /* Chiselled serif capitals, after the "MADRID" lettering in the logo. */
   .display {
     font-family: var(--font-display);
     font-weight: 800;
-    font-stretch: 118%;
     text-transform: uppercase;
-    letter-spacing: -0.025em;
-    line-height: 0.9;
+    letter-spacing: 0.005em;
+    line-height: 0.95;
   }
 
-  .display-tight {
-    font-stretch: 100%;
+  /* Wide, tracked caps, after "CUTZ" in the logo. */
+  .label {
+    font-family: var(--font-wide);
+    font-stretch: 125%;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
   }
 
-  .serif-accent {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    text-transform: none;
-    letter-spacing: -0.01em;
-  }
-
-  /* Small uppercase label used for eyebrows, indices and meta text. */
   .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-family: var(--font-wide);
+    font-stretch: 125%;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
+  }
+
+  /* Polished chrome, sampled from the logo's lettering. */
+  .chrome-text {
+    background-image: linear-gradient(180deg, #ffffff 0%, #f3f2f0 30%, #b9b7b5 50%, #7e7b7a 57%, #d9d7d4 72%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Brushed gold, sampled from the crown and "CUTZ". */
+  .gold-text {
+    background-image: linear-gradient(180deg, #fbefc4 0%, #f6c653 30%, #d4a141 52%, #8a6a1e 60%, #e9bc55 78%, #f8e6ad 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gold-surface {
+    background-image: linear-gradient(180deg, #fbe7a6 0%, #f2c457 38%, #d4a141 62%, #b8862f 82%, #e7b955 100%);
+  }
+
+  .gold-hairline {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-gold) 30%,
+      var(--color-gold-soft) 50%,
+      var(--color-gold) 70%,
+      transparent
+    );
+    height: 1px;
   }
 
   .hairline {
     background: linear-gradient(90deg, transparent, var(--color-line-strong) 20%, var(--color-line-strong) 80%, transparent);
     height: 1px;
-  }
-
-  /* Brushed-metal text treatment for oversized numerals. */
-  .metal-text {
-    background: linear-gradient(180deg, #ffffff 0%, #d9d8d4 38%, #8d9097 62%, #e9e7e2 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
 
   .outline-text {
@@ -179,6 +206,17 @@
   60%,
   100% {
     transform: translateY(200%);
+  }
+}
+
+/* A band of light sweeping across the logo's metal. */
+@keyframes shine {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  28%,
+  100% {
+    transform: translateX(220%) skewX(-18deg);
   }
 }
 

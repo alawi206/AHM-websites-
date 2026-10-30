@@ -20,7 +20,7 @@ function HoursTable() {
             <dt className="flex items-center gap-3">
               {d.day}
               {isToday && (
-                <span className="rounded-full bg-champagne/15 px-2 py-0.5 font-mono text-[0.5625rem] tracking-[0.16em] text-champagne uppercase">
+                <span className="rounded-full bg-gold/15 px-2 py-0.5 font-mono text-[0.5625rem] tracking-[0.16em] text-gold uppercase">
                   Today
                 </span>
               )}
@@ -60,7 +60,7 @@ export function Visit() {
             lines={[
               'Find your',
               <>
-                next <span className="serif-accent text-[1.02em] text-champagne-soft">cut.</span>
+                next <span className="gold-text">cut.</span>
               </>,
             ]}
             label="Find your next cut."
@@ -94,7 +94,7 @@ export function Visit() {
                 className="inline-flex h-12 items-center gap-3 rounded-full border border-line px-5 text-xs font-semibold tracking-[0.16em] text-silver uppercase transition-colors duration-300 hover:border-line-strong hover:text-bone"
               >
                 {copied ? (
-                  <Check className="size-4 text-champagne" strokeWidth={1.75} />
+                  <Check className="size-4 text-gold" strokeWidth={1.75} />
                 ) : (
                   <Copy className="size-4" strokeWidth={1.5} />
                 )}
@@ -107,14 +107,14 @@ export function Visit() {
             {hours.verified ? (
               <>
                 <p className="eyebrow mb-4 flex items-center gap-2 text-mist">
-                  <Clock className="size-3.5 text-champagne" strokeWidth={1.5} /> Hours
+                  <Clock className="size-3.5 text-gold" strokeWidth={1.5} /> Hours
                 </p>
                 <HoursTable />
               </>
             ) : (
               <div className="rounded-[3px] border border-line bg-coal p-6">
                 <p className="eyebrow flex items-center gap-2 text-mist">
-                  <Clock className="size-3.5 text-champagne" strokeWidth={1.5} /> Hours &amp; openings
+                  <Clock className="size-3.5 text-gold" strokeWidth={1.5} /> Hours &amp; openings
                 </p>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-silver">
                   Every open slot updates live on Booksy — see each barber&rsquo;s real-time availability before you book.
@@ -130,7 +130,7 @@ export function Visit() {
                 onClick={() => track('phone_click')}
                 className="mt-6 inline-flex items-center gap-3 text-sm text-silver transition-colors hover:text-bone"
               >
-                <Phone className="size-4 text-champagne" strokeWidth={1.5} /> {phone.value.display}
+                <Phone className="size-4 text-gold" strokeWidth={1.5} /> {phone.value.display}
               </a>
             )}
           </Reveal>
@@ -175,7 +175,7 @@ export function Visit() {
             )}
             <div className="absolute inset-x-4 bottom-4 flex flex-col gap-4 rounded-[3px] border border-line bg-ink/85 p-5 backdrop-blur-xl sm:inset-x-auto sm:left-4 sm:max-w-sm">
               <div>
-                <p className="font-display text-sm font-bold tracking-[0.12em] uppercase [font-stretch:115%]">Madrid Cutz</p>
+                <p className="font-wide text-sm font-bold tracking-[0.12em] uppercase [font-stretch:125%]">Madrid Cutz</p>
                 <p className="mt-1 text-sm text-silver">{fullAddress}</p>
               </div>
               <a
@@ -183,7 +183,7 @@ export function Visit() {
                 target="_blank"
                 rel="noopener"
                 onClick={() => track('directions_click', { placement: 'map-card' })}
-                className="inline-flex items-center gap-2 text-[0.6875rem] font-semibold tracking-[0.16em] text-champagne uppercase"
+                className="inline-flex items-center gap-2 text-[0.6875rem] font-semibold tracking-[0.16em] text-gold uppercase"
               >
                 Open in Google Maps <Navigation className="size-3.5" strokeWidth={1.5} />
                 <span className="sr-only">(opens in a new tab)</span>

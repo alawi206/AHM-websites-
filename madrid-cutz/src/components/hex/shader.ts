@@ -153,7 +153,8 @@ void main() {
   } else {
     float fres = 0.05 + 0.95 * pow(1.0 - ay, 5.0);
     float refl = mix(0.09, 0.42, fres) * (0.25 + 1.1 * cloud * cloud) * uFloor;
-    vec3 stone = vec3(0.016, 0.017, 0.019) * (0.6 + cloud) + vein * vec3(0.022, 0.021, 0.019);
+    // Blue-grey marble, as in the shop.
+    vec3 stone = vec3(0.012, 0.016, 0.021) * (0.6 + cloud) + vein * vec3(0.03, 0.033, 0.037);
     float pool = exp(-floorT * 0.055) * (1.0 - smoothstep(uHalfW * 0.5, uHalfW * 1.8, abs(fp.x)));
     vec3 diffuse = stone * (0.5 + 3.0 * pool * power);
     vec3 tint = vec3(1.0, 0.965, 0.9);

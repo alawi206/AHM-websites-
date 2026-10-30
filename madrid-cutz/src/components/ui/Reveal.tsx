@@ -55,7 +55,7 @@ type LinesProps = {
 export function RevealLines({
   lines,
   className = '',
-  lineClassName = '',
+  lineClassName = 'chrome-text',
   as = 'h2',
   immediate = false,
   delay = 0,

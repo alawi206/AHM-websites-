@@ -6,10 +6,11 @@ not rendered.
 
 ## Where the information came from
 
-The live Booksy profile could not be opened from the build environment (the network policy blocked `booksy.com`), and the
-screenshots/photos referenced in the brief were not attached to the build session. Data therefore comes from the brief
-plus search-engine snapshots of public listings (Booksy, Yelp, Yahoo Local, Facebook). Verify the items below against
-the live Booksy profile and with the owner before launch.
+The live Booksy profile could not be opened from the build environment (the network policy blocked `booksy.com`).
+Facts come from three Booksy screenshots supplied by the client (profile header plus two portfolio pages), the brief, and
+search-engine snapshots of public listings (Booksy, Yelp, Yahoo Local, Facebook). The screenshots are design references
+only and are not used as site images. Verify the remaining ⚠️/❌ items against the live Booksy profile and with the owner
+before launch.
 
 ## Status
 
@@ -18,14 +19,17 @@ the live Booksy profile and with the owner before launch.
 | Name | Madrid Cutz | ✅ Brief + all listings | Everywhere |
 | Address | 901 Auburn Way N, Suite D, Auburn, WA 98002 | ✅ Brief + all listings | Hero, Trust strip, Visit, Footer, JSON-LD |
 | Booking link | `booksy.com/en-us/1090147_madrid-cutz_barber-shop_39184_auburn` | ✅ Brief | Every "Book" button |
-| Rating | 5.0 on Booksy | ✅ Brief screenshots | Hero chip, Trust strip, Reviews |
-| Review count | 777 in screenshots → displayed as **750+** | ✅ (re-check live count) | Hero chip, Trust strip, Reviews |
+| Rating | 5.0 on Booksy | ✅ Booksy screenshot | Hero chip, Trust strip, Reviews |
+| Review count | 777 in the screenshot → displayed as **750+** | ✅ (re-check live count) | Hero chip, Trust strip, Reviews |
+| Booksy badge | "Booksy Recommended" | ✅ Booksy screenshot | Trust strip |
+| Portfolio size | 5 shown + "+150" more → displayed as **150+** | ✅ Booksy screenshot | Gallery (until real photos are added) |
+| Logo | Crown / MC monogram / MADRID CUTZ emblem | ✅ Supplied by the client | Hero, nav, final CTA, footer, icons, share image |
 | Services | Haircut · Haircut & Beard · Kids Haircut | ⚠️ From Booksy search snapshots | Services (names only) |
 | Prices / durations | Haircut $35 · Haircut & Beard $50 · Kids (under 10) $30 · ~45 min | ❌ Hidden — snapshot data | Set `price` / `duration` in `services` |
 | Barbers | AJ, Adam, Mar, Abbas, Isaiah | ⚠️ From the brief's Booksy screenshots | Barbers, Trust strip count |
 | Hours | Yelp: Mon–Fri 10–7, Sat 9–7, Sun 10–5 (other directories disagree) | ❌ Hidden | Set `hours.verified = true` |
 | Phone | (253) 737-5646 (Yelp / Yahoo / Facebook listings) | ❌ Hidden | Set `phone.verified = true` |
-| Instagram | @madridcutz | ❌ Hidden — handle unconfirmed | Set `verified: true` in `socials` |
+| Instagram | @madridcutz | ✅ Watermark on the shop's own Booksy portfolio photos | Footer, gallery, JSON-LD `sameAs` |
 | Facebook | facebook.com/p/Madrid-Cutz-Barbershop-61553226029361 | ❌ Hidden — unconfirmed | Set `verified: true` in `socials` |
 | Reviews (quotes) | — | ❌ None yet | Add verbatim entries to `reviews` |
 
@@ -36,6 +40,22 @@ Notes:
 - When the hours are verified, add `openingHoursSpecification` to the JSON-LD in `index.html`. Do the same for `telephone`.
 - The Services section deliberately sends people to Booksy for live prices, so prices on the site can never go stale. If
   the owner prefers to show prices, fill in `price` and `duration` and they appear on each row.
+
+## Logo and brand
+
+The client's emblem lives at `src/assets/brand/madrid-cutz-logo.png` (transparent PNG). It is served as responsive
+AVIF/WebP through `BrandLogo` (`src/components/ui/BrandLogo.tsx`). That component also clips a light sweep to the
+emblem's own outline, which is why the source must keep its transparent background. To swap in an updated logo, replace
+that file with the same name, then run `npm run render:social` to rebuild the favicon, app icons and share image.
+
+The rest of the brand system is sampled from the emblem:
+
+- **Chrome**: headlines in Cinzel with a polished-chrome gradient, after the "MADRID" lettering.
+- **Gold**: accents, eyebrows and the primary buttons, with gold values taken from the crown and "CUTZ".
+- **Wide caps**: labels in widely tracked Archivo caps, after "CUTZ".
+- **Hexagon light**: the ceiling also shown inside the emblem drives the hero and backdrops.
+
+Gold is kept as metal on black (buttons, accents, hairlines) and never fills large surfaces.
 
 ## Reviews
 
@@ -78,5 +98,5 @@ With `npm run dev` running:
 
 ```bash
 npm run render:art      # src/assets/art/*.jpg (stills of the hex-light shader)
-npm run render:social   # public/og-image.jpg + public/apple-touch-icon.png
+npm run render:social   # public/og-image.jpg + favicon and app icons from the logo
 ```

@@ -37,7 +37,7 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
           {/* Roster number in outline type; it "powers on" under the lights on hover. */}
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute top-[14%] left-5 font-display text-[6.5rem] leading-none font-extrabold tracking-[-0.04em] [font-stretch:110%] outline-text transition-[color,-webkit-text-stroke-color,text-shadow] duration-700 group-hover:text-bone group-hover:[-webkit-text-stroke-color:transparent] group-hover:[text-shadow:0_0_36px_rgba(246,245,242,0.35)] md:left-6 md:text-[7.5rem] lg:text-[clamp(4.5rem,7vw,8rem)]"
+            className="pointer-events-none absolute top-[14%] left-5 font-display text-[6.5rem] leading-none font-extrabold outline-text transition-[color,-webkit-text-stroke-color,text-shadow] duration-700 group-hover:text-gold group-hover:[-webkit-text-stroke-color:transparent] group-hover:[text-shadow:0_0_40px_rgba(246,198,83,0.45)] md:left-6 md:text-[7.5rem] lg:text-[clamp(4.5rem,7vw,8rem)]"
           >
             {String(index + 1).padStart(2, '0')}
           </span>
@@ -45,7 +45,7 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
       )}
 
       <div className="relative flex items-center justify-end">
-        <HexMark className="size-5 text-mist transition-colors duration-700 group-hover:text-bone" />
+        <HexMark className="size-5 text-mist transition-colors duration-700 group-hover:text-gold" />
       </div>
 
       <div className="relative">
@@ -89,7 +89,7 @@ export function Barbers() {
               lines={[
                 'The people',
                 <>
-                  <span className="serif-accent text-[1.02em] text-champagne-soft">behind the</span> precision.
+                  <span className="gold-text">behind the</span> precision.
                 </>,
               ]}
               label="The people behind the precision."
