@@ -3,7 +3,7 @@
  * they are picked up automatically at build time, resized and re-encoded to
  * AVIF + WebP with responsive srcsets (vite-imagetools). No code changes.
  *
- *   photos/work/fade-01.jpg      → gallery, category taken from the prefix
+ *   photos/work/01-fade-low.jpg  → gallery; number sets the order, first known word the filter
  *   photos/barbers/aj.jpg        → portrait for the barber with id "aj"
  *   photos/shop/hero.jpg         → hero backdrop (layered under the LED light)
  *   photos/shop/about.jpg        → "More than a haircut" image
@@ -75,7 +75,18 @@ const ALT_SUBJECT: Record<string, string> = {
  * Optional hand-written alt text, keyed by file name. Anything not listed gets
  * a descriptive default such as "Fade haircut by Madrid Cutz, Auburn WA".
  */
-const ALT_OVERRIDES: Record<string, string> = {}
+const ALT_OVERRIDES: Record<string, string> = {
+  '01-taper-locs': 'Locs with a clean taper fade, under the hexagon LED ceiling at Madrid Cutz',
+  '02-fade-low-lineup': 'Low fade with a sharp line-up and a short textured top',
+  '03-beard-steam-trim': 'Beard trim with steam and a face mask in the chair at Madrid Cutz',
+  '04-fade-low-taper-blonde': 'Low taper fade with a textured top, blended into a full beard',
+  '05-style-textured-high-fade': 'Textured top with a high fade, in a Madrid Cutz cape',
+  '06-fade-bald-beard': 'Bald fade blended into a full beard, under the hexagon lights',
+  '07-kids-textured-fade': 'Kids haircut: fade with a textured, spiky top',
+  '08-taper-swept-back': 'Swept-back textured top with a taper fade, under the hexagon lights',
+  '09-beard-full-shape': 'Full beard, shaped and lined up, with the Madrid Cutz stations behind',
+  '10-beard-lineup': 'Sculpted beard and line-up with a fade, seen from above in the chair',
+}
 
 function baseName(path: string) {
   return path
@@ -84,9 +95,13 @@ function baseName(path: string) {
     .replace(/\.[a-z0-9]+$/i, '')
 }
 
+/** First recognised word in the file name, so "01-taper-locs.jpg" → Tapers. */
 function categoryFor(name: string) {
-  const prefix = name.toLowerCase().split(/[-_\s]/)[0]
-  return CATEGORY_LABELS[prefix] ?? 'Cuts'
+  const word = name
+    .toLowerCase()
+    .split(/[-_\s]/)
+    .find((token) => token in CATEGORY_LABELS)
+  return word ? CATEGORY_LABELS[word] : 'Cuts'
 }
 
 export const workPhotos: Photo[] = Object.entries(workFiles)

@@ -71,13 +71,22 @@ export const reviews: Review[] = [
 
 ## Photos
 
+**Current photos.** The 10 gallery photos and the About image are the shop's own Booksy portfolio photos. They were
+cropped from the client's Booksy screenshots, avoiding Booksy's buttons, clipped tiles and the "@madridcutz" sticker
+photo. Each has a hand-written alt text in `ALT_OVERRIDES`. Because they come from screenshots they are only about
+550px wide, so the site never shows them larger than that (gallery tiles, lightbox and About frame are all capped).
+Before launch:
+
+1. Replace them with the original files from the shop's phone or Booksy uploads, keeping the same file names.
+2. Confirm the shop is happy for these client photos to appear on its website as well as on Booksy.
+
 Real photography is the biggest upgrade available. The pipeline is automatic: drop files in, then run `npm run dev` or
 `npm run build`. Images are resized to responsive AVIF/WebP and lazy-loaded. They are never upscaled, stretched or
 cropped in the gallery.
 
 | Folder | What | Naming |
 | --- | --- | --- |
-| `src/assets/photos/work/` | Haircut portfolio (gallery + lightbox) | `fade-01.jpg`, `taper-02.jpg`, `beard-01.jpg`, `style-01.jpg`, `kids-01.jpg` |
+| `src/assets/photos/work/` | Haircut portfolio (gallery + lightbox) | `01-taper-locs.jpg`, `02-fade-low.jpg` … the number sets the order; the first of `fade`, `taper`, `beard`, `style`, `kids` sets the filter |
 | `src/assets/photos/barbers/` | Barber portraits (3:4) | `aj.jpg`, `adam.jpg`, `mar.jpg`, `abbas.jpg`, `isaiah.jpg` |
 | `src/assets/photos/shop/` | `hero.jpg`, `about.jpg`, `visit.jpg` | Exactly these names |
 | `src/assets/video/` | Optional hero film | `hero.mp4` / `hero.webm` |

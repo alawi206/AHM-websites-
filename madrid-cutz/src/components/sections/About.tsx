@@ -34,7 +34,11 @@ export function About() {
   return (
     <section id="about" aria-labelledby="about-title" className="relative overflow-hidden bg-ink py-24 md:py-36">
       <div className="mx-auto grid grid-cols-1 max-w-[1600px] items-start gap-14 px-5 md:px-10 lg:grid-cols-12 lg:gap-10">
-        <div className="relative lg:sticky lg:top-28 lg:col-span-6">
+        <div
+          className="relative mx-auto w-full lg:sticky lg:top-28 lg:col-span-6 lg:mx-0"
+          // A real photo is never shown larger than its native width.
+          style={photo ? { maxWidth: photo.img.w } : undefined}
+        >
           <motion.div
             ref={frameRef}
             className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-coal sm:aspect-[5/6] lg:aspect-[4/5]"
@@ -46,7 +50,7 @@ export function About() {
             <motion.div className="absolute inset-[-8%_0]" style={{ y: imageY }}>
               <Picture
                 picture={picture}
-                alt={photo ? 'Inside Madrid Cutz barbershop in Auburn, WA' : ''}
+                alt={photo ? 'Skin fade and full beard under the hexagon LED ceiling inside Madrid Cutz, Auburn WA' : ''}
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="block h-full w-full"
                 imgClassName="h-full w-full object-cover"

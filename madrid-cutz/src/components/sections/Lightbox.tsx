@@ -126,9 +126,14 @@ export function Lightbox({ photos, index, onChange, onClose }: Props) {
             <Picture
               picture={photo.picture}
               alt={photo.alt}
-              sizes="92vw"
+              sizes={`${photo.picture.img.w}px`}
               loading="eager"
-              imgClassName="h-auto max-h-[calc(100svh-11rem)] w-auto max-w-[94vw] rounded-[2px] object-contain md:max-w-[80vw]"
+              imgClassName="h-auto w-auto rounded-[2px] object-contain"
+              // Never enlarge past the photo's real resolution.
+              imgStyle={{
+                maxWidth: `min(94vw, ${photo.picture.img.w}px)`,
+                maxHeight: `min(calc(100svh - 11rem), ${photo.picture.img.h}px)`,
+              }}
             />
           </motion.div>
         </AnimatePresence>

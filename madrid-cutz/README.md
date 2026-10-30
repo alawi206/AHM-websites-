@@ -67,7 +67,7 @@ docs/                    content verification guide, growth roadmap
 ## Quality checklist (verified in a real browser at 1440×900, 1366×657, 1280×800, 820×1180, 390×844 and 360×640)
 
 - No horizontal overflow at desktop or mobile widths, and no console errors in dev or the production build.
-- All 25 booking CTAs point to `https://booksy.com/en-us/1090147_madrid-cutz_barber-shop_39184_auburn` and open in a new tab.
+- All 21 booking CTAs point to `https://booksy.com/en-us/1090147_madrid-cutz_barber-shop_39184_auburn` and open in a new tab.
 - Every in-page anchor resolves. The page has one `<h1>`, and every image has alt text (decorative images use an empty `alt`).
 - Gallery: category filters, lightbox with ← → / Esc, focus trap, focus return, scroll lock and touch swipe.
 - Mobile menu: focus trap, Esc to close, and accurate anchor jumps. The sticky mobile "Book now" bar hides near the final CTA.
@@ -78,6 +78,7 @@ docs/                    content verification guide, growth roadmap
 ## Before launch
 
 1. Work through the checklist in [docs/CONTENT.md](docs/CONTENT.md): live review count, roster, hours, phone and socials.
-2. Add the shop's approved photos. The gallery, about image and barber portraits switch on by themselves.
+2. Swap the gallery and About photos (currently ~550px crops of the shop's Booksy portfolio) for the original files, and
+   confirm the shop is happy to show them. Barber portraits also switch on by themselves when added.
 3. Once the domain is known, make `og:image` an absolute URL and add `<link rel="canonical">` plus `url` in the JSON-LD.
 4. Optional growth features are described in [docs/GROWTH.md](docs/GROWTH.md). None are active.

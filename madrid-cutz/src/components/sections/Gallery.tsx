@@ -248,6 +248,32 @@ export function Gallery() {
           {hasPhotos ? <Masonry key={filter} photos={photos} onOpen={openAt} /> : <PortfolioFallback />}
         </div>
 
+        {hasPhotos && (
+          <Reveal className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-silver">
+              A few recent cuts from the shop. {reputation.portfolioDisplay} more on the Madrid Cutz Booksy profile.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <BookLink placement="gallery-more" variant="text">
+                See all photos on Booksy
+              </BookLink>
+              {instagram && (
+                <a
+                  href={instagram.href}
+                  target="_blank"
+                  rel="noopener"
+                  onClick={() => track('social_click', { network: 'Instagram', placement: 'gallery' })}
+                  className="inline-flex items-center gap-2 text-xs font-medium tracking-[0.18em] text-silver uppercase transition-colors hover:text-gold-soft"
+                >
+                  <InstagramGlyph className="size-4 text-gold" />
+                  {instagram.handle}
+                  <span className="sr-only">on Instagram (opens in a new tab)</span>
+                </a>
+              )}
+            </div>
+          </Reveal>
+        )}
+
         <div className="mt-20 grid grid-cols-1 items-end gap-8 border-t border-line pt-10 md:mt-28 md:grid-cols-12 md:pt-14">
           <RevealLines
             as="p"
