@@ -10,7 +10,9 @@
     "typecheck": "tsc -p .",
     "render:art": "node scripts/render-art.mjs",
     "render:social": "node scripts/render-social.mjs",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"scripts/**/*.{tsx,mjs}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"scripts/**/*.{tsx,mjs}\"",
+    "demo:desktop": "node scripts/record-demo.mjs desktop",
+    "demo:mobile": "node scripts/record-demo.mjs mobile"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

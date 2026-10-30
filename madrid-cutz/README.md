@@ -76,6 +76,11 @@ docs/                    content verification guide, growth roadmap
 - SEO: descriptive title/description targeting "barbershop Auburn WA" and "haircuts Auburn Washington", Open Graph/Twitter
   card, and `HairSalon` JSON-LD with verified fields only.
 
+## Demo videos
+
+Fast walkthroughs for sharing are in [`demo/`](demo/): `madrid-cutz-desktop.mp4` (1080p) and `madrid-cutz-mobile.mp4`
+(phone portrait). Regenerate them with `npm run demo:desktop` / `npm run demo:mobile` while `npm run preview` runs.
+
 ## Before launch
 
 1. Work through the checklist in [docs/CONTENT.md](docs/CONTENT.md): live review count, roster, hours, phone and socials.
