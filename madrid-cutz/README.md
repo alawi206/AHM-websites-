@@ -26,7 +26,8 @@ fonts (Cinzel, Archivo variable, Geist).
 ## Built around the logo
 
 The client's emblem (crown, MC monogram, clippers and the hexagon-lit shop) is the centrepiece. It stands in front of the
-live hex-light ceiling in the hero, and it also appears in the nav lockup, the final call to action, the footer, the
+live hex-light ceiling in the hero, and it also appears in the nav lockup, on every barber card, in the "Look sharp"
+section, the final call to action, the footer, the
 favicon/app icons and the share image. A light sweep runs across its metal, clipped to the emblem's own outline. The type
 and colour system come from the emblem as well: chrome serif capitals (Cinzel) like "MADRID", brushed gold like the crown
 and "CUTZ", and widely tracked caps for labels. Details are in [docs/CONTENT.md](docs/CONTENT.md#logo-and-brand).

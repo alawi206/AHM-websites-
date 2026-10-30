@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { HexLights } from '../hex/HexLights'
-import { HexMark } from '../ui/primitives'
+import { BrandLogo } from '../ui/BrandLogo'
 
 /** Full-bleed pause between reviews and the visit info: the ceiling, straight up. */
 export function Cinematic() {
@@ -42,7 +42,7 @@ export function Cinematic() {
 
         <div className="absolute inset-x-0 bottom-0 mx-auto flex max-w-[1600px] items-center justify-between px-5 pb-8 md:px-10 md:pb-10">
           <p className="eyebrow flex items-center gap-3 text-silver">
-            <HexMark className="size-4 text-bone" /> Madrid Cutz
+            <BrandLogo sizes="40px" alt="" className="w-9" /> Madrid Cutz
           </p>
           <p className="eyebrow text-silver">Auburn, Washington</p>
         </div>

@@ -4,7 +4,8 @@ import { barberPhotos } from '../../content/media'
 import { barbers, type Barber } from '../../content/site'
 import { BookLink } from '../ui/BookLink'
 import { Reveal, RevealLines } from '../ui/Reveal'
-import { Eyebrow, HexMark, Picture } from '../ui/primitives'
+import { BrandLogo } from '../ui/BrandLogo'
+import { Eyebrow, Picture } from '../ui/primitives'
 
 function BarberCard({ barber, index }: { barber: Barber; index: number }) {
   const photo = barberPhotos[barber.id]
@@ -45,7 +46,11 @@ function BarberCard({ barber, index }: { barber: Barber; index: number }) {
       )}
 
       <div className="relative flex items-center justify-end">
-        <HexMark className="size-5 text-mist transition-colors duration-700 group-hover:text-gold" />
+        <BrandLogo
+          sizes="44px"
+          alt=""
+          className="w-10 opacity-80 transition-[opacity,transform] duration-700 ease-out-expo group-hover:scale-105 group-hover:opacity-100"
+        />
       </div>
 
       <div className="relative">

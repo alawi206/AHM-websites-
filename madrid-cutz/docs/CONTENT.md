@@ -23,7 +23,7 @@ before launch.
 | Review count | 777 in the screenshot → displayed as **750+** | ✅ (re-check live count) | Hero chip, Trust strip, Reviews |
 | Booksy badge | "Booksy Recommended" | ✅ Booksy screenshot | Trust strip |
 | Portfolio size | 5 shown + "+150" more → displayed as **150+** | ✅ Booksy screenshot | Gallery (until real photos are added) |
-| Logo | Crown / MC monogram / MADRID CUTZ emblem | ✅ Supplied by the client | Hero, nav, final CTA, footer, icons, share image |
+| Logo | Crown / MC monogram / MADRID CUTZ emblem (file byte-identical to the one supplied) | ✅ Supplied by the client | Hero, nav, barber cards, "Look sharp" section, final CTA, footer, tab / phone icons, share image |
 | Services | Haircut · Haircut & Beard · Kids Haircut | ⚠️ From Booksy search snapshots | Services (names only) |
 | Prices / durations | Haircut $35 · Haircut & Beard $50 · Kids (under 10) $30 · ~45 min | ❌ Hidden — snapshot data | Set `price` / `duration` in `services` |
 | Barbers | AJ, Adam, Mar, Abbas, Isaiah | ⚠️ From the brief's Booksy screenshots | Barbers, Trust strip count |
